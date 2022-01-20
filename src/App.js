@@ -10,8 +10,8 @@ import Home from './Component/Home/Home';
 const App= () => {
   return (
     <div>
-      <ToastContainer />
       <Navigation />
+      <ToastContainer />
       <Switch>
             <Route exact path="/">
               <Home />

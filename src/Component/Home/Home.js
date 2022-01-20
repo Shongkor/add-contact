@@ -2,7 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
+
     return (
+        
         <div className="container">
             <div className="row">
             <div className="col-md-10 my-4">
