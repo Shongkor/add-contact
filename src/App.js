@@ -19,7 +19,7 @@ const App= () => {
             <Route path="/add">
               <AddComponent />
             </Route>
-            <Route path="/edit">
+            <Route path="/edit/:id">
               <EditComponent />
             </Route>
         </Switch>

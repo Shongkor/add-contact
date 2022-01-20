@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { toast } from 'react-toastify';
 
 const AddComponent = () => {
@@ -7,6 +8,9 @@ const AddComponent = () => {
     const [number,setNumber] = useState();
     const [email,setEmail] = useState();
     const students=useSelector((state) => state);
+    const dispatch =useDispatch();
+    const useHistry=useHistory()
+    
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -16,17 +20,32 @@ const AddComponent = () => {
               });
           }
         if(students.find(student=> student.email === email && email)){
-            toast.error("Email Already Exist !", {
+            toast.error("This Email Already Exist !", {
                 position: toast.POSITION.TOP_LEFT
               });
         }
-        if(students.find(student=> parseInt(student.contact) === parseInt(number) && number)){
-            toast.error("Number Already Exist !", {
+        if(students.find(student=> parseInt(student.number) === parseInt(number) && number)){
+            toast.error("This Number Already Exist !", {
                 position: toast.POSITION.TOP_LEFT
               });
         }
         
+        dispatch({ type : "ADD_STUDENT", 
+        payload :  {
+            id : students.length,
+           name,
+           email,
+           number,
+       }})
+        
+         toast.success("Student Is Added Successfully!", {
+            position: toast.POSITION.TOP_CENTER
+          })
+          useHistry.push("/");
     }
+    
+    
+     
     return (
         <div>
             <h1 className="display-3 text-center pt-5">Add Student Here</h1>
@@ -43,11 +62,12 @@ const AddComponent = () => {
                         <input value={number} onChange={e => setNumber(e.target.value)} type="number" placeholder="Enter Phone Number" className="form-control" />
                     </div>
                     <div className="form-group text-center">
-                        <input className="btn btn-block btn-dark form-control" type="submit" value="Add Student"/>
+                        <input  className="btn btn-block btn-dark form-control" type="submit" value="Add Student"/>
                     </div>
                 </form>
                </div>
             </div>
+            
         </div>
     )
 }
